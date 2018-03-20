@@ -1,0 +1,138 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>无标题文档</title>
+
+<style>
+  em{
+    width:100px;
+    display:inline-block;
+  }
+  strong{
+    display:inline-block;
+    width:20px;
+  }
+</style>
+
+</head>
+
+<body>
+
+<ul id="list">
+	<li>
+  	<input type="button" value="-" />
+    <strong>0</strong>
+  	<input type="button" value="+" />
+    单价：<em>12.5元</em>
+    小计：<span class="price_s">0元</span>
+  </li>
+	<li>
+  	<input type="button" value="-" />
+    <strong>0</strong>
+  	<input type="button" value="+" />
+    单价：<em>10.5元</em>
+    小计：<span class="price_s">0元</span>
+  </li>
+	<li>
+  	<input type="button" value="-" />
+    <strong>0</strong>
+  	<input type="button" value="+" />
+    单价：<em>8.5元</em>
+    小计：<span class="price_s">0元</span>
+  </li>
+	<li>
+  	<input type="button" value="-" />
+    <strong>0</strong>
+  	<input type="button" value="+" />
+    单价：<em>8元</em>
+    小计：<span class="price_s">0元</span>
+  </li>
+	<li>
+  	<input type="button" value="-" />
+    <strong>0</strong>
+  	<input type="button" value="+" />
+    单价：<em>14.5元</em>
+    小计：<span class="price_s">0元</span>
+  </li>
+</ul>
+
+<p>
+商品合计共：<span>0</span>件<br/>共花费了：<span>0</span>元<br />
+所购商品中最贵的商品单价是：<span>0</span>元
+</p>
+
+<script>
+  var oUl = document.getElementsByTagName("ul")[0];
+  var oLi = oUl.getElementsByTagName("li");
+  var oEms = oUl.getElementsByTagName("em");
+
+  var oP = document.getElementsByTagName("p")[0];
+  var oSpan1P = oP.getElementsByTagName("span")[0];
+  var oSpan2P = oP.getElementsByTagName("span")[1];
+  var oSpan3P = oP.getElementsByTagName("span")[2];
+
+
+  
+  function btn(i){
+    var oBtn = oLi[i].getElementsByTagName("input");
+    var oStrong = oLi[i].getElementsByTagName("strong")[0];
+    var oEm = oLi[i].getElementsByTagName("em")[0];
+    var oSpan = oLi[i].getElementsByTagName("span")[0];
+
+    for(var m=0;m<oBtn.length;m++){
+      oBtn[m].index = m;
+      oBtn[m].onclick = function(){
+      var tempSum =0;      //合计件数
+      var tempPrice = 0;   //合计价钱
+      var arrEx = [0];     //数组存放价格 用来比较
+
+      if(parseFloat(oStrong.innerHTML) > 0 && this.value == "-"){
+        oStrong.innerHTML = parseFloat(oStrong.innerHTML) - 1;
+        oSpan.innerHTML = parseFloat(oSpan.innerHTML) - parseFloat(oEm.innerHTML) + "元";
+      }
+      else if(this.value == "+"){
+        oStrong.innerHTML = parseFloat(oStrong.innerHTML) + 1;
+        oSpan.innerHTML = parseFloat(oSpan.innerHTML) + parseFloat(oEm.innerHTML) + "元";
+      }
+
+        //遍历件数
+        var lenSum = oUl.getElementsByTagName("strong");
+        var lenEm = oUl.getElementsByTagName("em");
+        for(var j=0;j<lenSum.length;j++){
+          var num = j;
+          tempSum += parseFloat(lenSum[num].innerHTML);
+          // console.log(parseFloat(lenSum[num].innerHTML));
+          if(parseFloat(lenSum[num].innerHTML)>0){
+            arrEx.push(parseFloat(lenEm[num].innerHTML));
+          }
+        }
+        oSpan1P.innerHTML = tempSum;
+        var max = arrEx[0];
+        for(var m=1;m<arrEx.length;m++){
+          if(max<arrEx[m]){
+            max = arrEx[m];
+          }
+        }
+        oSpan3P.innerHTML = max;
+        //遍历价钱
+        var lenPrice = oUl.getElementsByTagName("span");
+        for(var k=0;k<lenPrice.length;k++){
+          var price =k;
+          tempPrice += parseFloat(lenPrice[price].innerHTML);
+        }
+         oSpan2P.innerHTML = tempPrice;
+      }
+    }
+  }
+
+  for(var i=0;i<oLi.length;i++){
+    btn(i);
+  }
+  
+
+</script>
+
+
+</body>
+</html>

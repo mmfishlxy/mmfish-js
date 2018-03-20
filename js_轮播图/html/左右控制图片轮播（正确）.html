@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>轮播图</title>
+<style type="text/css">
+	body{
+		margin:0;
+		padding:0;
+		position:relative;
+	}
+	#pic{
+		margin:0 auto;
+		width:391px;
+		height:479px;
+	}
+	img{
+		width:391px;
+		height:479px;
+	}
+	#btn1{
+		width:50px;
+		height:80px;
+		background-color: gray;
+		opacity: 0.5;
+		position:absolute;
+		top:180px;
+		left:340px;
+		color:#000;
+		font-size: 50px;
+	}
+	#btn2{
+		width:50px;
+		height:80px;
+		background-color: gray;
+		opacity: 0.5;
+		position:absolute;
+		top:180px;
+		left:952px;
+		color:#000;
+		font-size: 50px;
+	}
+</style>
+</head>
+<body>
+	<input type="button" value="<" id="btn1"/>
+	<div id="pic">
+		<img src="../images/1.png" alt="图片马上就来~">
+	</div>
+	<input type="button" value=">" id="btn2"/>
+<script>
+	var oPicDiv = document.getElementById("pic");
+	var oImg = document.getElementsByTagName("img")[0];
+	var oBtn1 = document.getElementsByTagName("input")[0];
+	var oBtn2 = document.getElementsByTagName("input")[1];
+
+	var arr = ["../images/1.png","../images/2.png","../images/3.png","../images/4.png"];
+	var i = 0;
+	oBtn1.onclick = function(){
+		i--;
+		// console.log(i);
+		if(i==-1){
+			i=3;
+		}
+		oImg.src = arr[i];
+	}
+	oBtn2.onclick = function(){
+		i++;
+		// console.log(i);
+		if(i==4){
+			i = 0;
+		}
+		oImg.src = arr[i];
+	}
+	
+</script>
+</body>
+</html>
